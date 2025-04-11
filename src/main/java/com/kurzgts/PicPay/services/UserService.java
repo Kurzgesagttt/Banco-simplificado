@@ -7,6 +7,7 @@ import com.kurzgts.PicPay.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @Service
 public class UserService {
@@ -19,7 +20,7 @@ public class UserService {
 
     public User createUser(User user){
         if(user == null){
-            throw new IllegalArgumentException("User cannot be null");
+            throw new MethodArgumentNotValidException();
         }
         //criptografa a senha para colocar no banco
         //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
