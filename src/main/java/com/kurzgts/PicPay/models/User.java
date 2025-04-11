@@ -39,9 +39,7 @@ public class User {
     @Column(name = "create_date",nullable = false)
     private LocalDateTime createdAt;
 
-    public User(UUID id, LocalDateTime createdAt, String password, String cpf, UserTypes userType, String name, String email) {
-        this.id = id;
-        this.createdAt = createdAt;
+    public User(String name,String email,String password, String cpf, UserTypes userType) {
         this.balance = 0.0d;
         this.password = password;
         this.cpf = cpf;

@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 
+
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody CreateUserDTO user){
 
 
-
+        return ResponseEntity.ok().build();
     }
 
 }
