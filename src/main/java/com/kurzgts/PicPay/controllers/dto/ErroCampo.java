@@ -1,4 +1,4 @@
 package com.kurzgts.PicPay.controllers.dto;
 
-public record ErroCampo() {
+public record ErroCampo(String message,String erro){
 }
