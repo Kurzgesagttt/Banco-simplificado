@@ -20,8 +20,7 @@ public class UserValidator {
     }
     private boolean existeUserCadastrado(User user) {
         Optional<User> userEncontado =  repository.findByCpf(user.getCpf());
-        return userEncontado.isPresent() &&
-                (user.getId() == null || !user.getId().equals(userEncontado.get().getId()));
+        return userEncontado.isPresent() && (user.getId() == null || !user.getId().equals(userEncontado.get().getId()));
     }
 
 

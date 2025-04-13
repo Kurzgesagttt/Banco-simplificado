@@ -7,6 +7,8 @@ import com.kurzgts.PicPay.exceptions.RegistroDuplicadoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
@@ -25,6 +27,7 @@ public class GlobalExceptionHandler {
         return ErroResponseDTO.respostaPadrao(e.getMessage());
     }
     @ExceptionHandler(RegistroDuplicadoException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public ErroResponseDTO registroDuplicadoException(RegistroDuplicadoException ex) {
         return ErroResponseDTO.conflito(ex.getMessage());
     }
