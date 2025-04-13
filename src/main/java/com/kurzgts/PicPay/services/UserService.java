@@ -1,21 +1,11 @@
 package com.kurzgts.PicPay.services;
 
-import com.kurzgts.PicPay.controllers.dto.CreateUserDTO;
-import com.kurzgts.PicPay.controllers.mapper.CreateUserMapper;
-import com.kurzgts.PicPay.exceptions.CustomValidationException;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.UserRepository;
 import com.kurzgts.PicPay.validator.UserValidator;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -28,7 +18,6 @@ public class UserService {
     UserValidator validator;
 
     public User createUser(User user){
-        //TODO
         validator.validator(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return repository.save(user);

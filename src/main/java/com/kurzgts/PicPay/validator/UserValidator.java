@@ -1,5 +1,6 @@
 package com.kurzgts.PicPay.validator;
 
+import com.kurzgts.PicPay.exceptions.RegistroDuplicadoException;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,13 @@ public class UserValidator {
 
     public void validator(User user){
         if(existeUserCadastrado(user)){
-            throw new RuntimeException("Usuário já cadastrado");
+            throw new RegistroDuplicadoException("Usuário já cadastrado");
         }
     }
     private boolean existeUserCadastrado(User user) {
         Optional<User> userEncontado =  repository.findByCpf(user.getCpf());
-        if(user.getId() == null){
-            return userEncontado.isEmpty();
-        }
-
-        return !user.getId().equals(userEncontado.get().getId()) && userEncontado.isPresent();
+        return userEncontado.isPresent() &&
+                (user.getId() == null || !user.getId().equals(userEncontado.get().getId()));
     }
 
 
