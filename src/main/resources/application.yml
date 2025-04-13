@@ -2,7 +2,7 @@ spring:
   application:
     name: PicPay
   datasource:
-    url: jdbc:mysql://localhost:3333/banco
+    url: ${DATASOURCE_URL:jdbc:mysql://localhost:3333/banco}
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver

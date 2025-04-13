@@ -13,12 +13,11 @@ public class UserValidator {
     private UserRepository repository;
 
     public void validator(User user){
-        if(existeAutorCadastrado(user)){
+        if(existeUserCadastrado(user)){
             throw new RuntimeException("Usuário já cadastrado");
         }
     }
-
-    private boolean existeAutorCadastrado(User user) {
+    private boolean existeUserCadastrado(User user) {
         Optional<User> userEncontado =  repository.findByCpf(user.getCpf());
         if(user.getId() == null){
             return userEncontado.isEmpty();

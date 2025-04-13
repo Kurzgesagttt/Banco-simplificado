@@ -1,0 +1,1 @@
+docker run --name bancodb -e MYSQL_ROOT_PASSWORD=root MYSQL_DATABASE=banco -d -p 3333:3306 mysql:latest

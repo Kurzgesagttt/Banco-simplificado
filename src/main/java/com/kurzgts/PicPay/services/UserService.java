@@ -29,9 +29,7 @@ public class UserService {
 
     public User createUser(User user){
         //TODO
-
-        //fazer o User Validator
-        //criptografa a senha para colocar no banco
+        validator.validator(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return repository.save(user);
     }
