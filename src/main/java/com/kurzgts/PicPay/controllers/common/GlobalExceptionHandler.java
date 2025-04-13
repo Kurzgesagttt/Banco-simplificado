@@ -23,5 +23,4 @@ public class GlobalExceptionHandler {
     public ErroResponseDTO operacaoNaoPermitidaException(OperacaoNaoPermitidaException e) {
         return ErroResponseDTO.respostaPadrao(e.getMessage());
     }
-
 }
