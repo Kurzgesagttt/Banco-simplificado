@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransferController {
 
     @PostMapping
-    public ResponseEntity<Transfer> createTransfer(TransferDTO transferDTO){
+    public ResponseEntity<Transfer> createTransfer(){
         //TODO
 
 
