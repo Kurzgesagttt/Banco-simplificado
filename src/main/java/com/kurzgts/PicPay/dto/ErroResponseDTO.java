@@ -1,4 +1,4 @@
-package com.kurzgts.PicPay.controllers.dto;
+package com.kurzgts.PicPay.dto;
 
 import org.springframework.http.HttpStatus;
 

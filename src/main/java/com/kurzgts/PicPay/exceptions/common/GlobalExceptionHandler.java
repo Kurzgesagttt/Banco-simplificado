@@ -1,21 +1,16 @@
 package com.kurzgts.PicPay.exceptions.common;
 
-import com.kurzgts.PicPay.controllers.dto.ErroResponseDTO;
-import com.kurzgts.PicPay.exceptions.CustomValidationException;
+import com.kurzgts.PicPay.dto.ErroResponseDTO;
 import com.kurzgts.PicPay.exceptions.OperacaoNaoPermitidaException;
 import com.kurzgts.PicPay.exceptions.RegistroDuplicadoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {

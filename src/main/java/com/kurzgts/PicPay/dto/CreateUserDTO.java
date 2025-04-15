@@ -1,4 +1,4 @@
-package com.kurzgts.PicPay.controllers.dto;
+package com.kurzgts.PicPay.dto;
 
 import com.kurzgts.PicPay.models.UserTypes;
 import jakarta.validation.constraints.Email;

@@ -1,7 +1,6 @@
 package com.kurzgts.PicPay.controllers;
 
-import com.kurzgts.PicPay.controllers.dto.CreateUserDTO;
-import com.kurzgts.PicPay.controllers.mapper.CreateUserMapper;
+import com.kurzgts.PicPay.dto.CreateUserDTO;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.services.UserService;
 import jakarta.validation.Valid;
