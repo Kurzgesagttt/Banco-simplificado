@@ -22,7 +22,7 @@ public class Transaction {
     private UUID receiver;
 
     @CreationTimestamp
-    @Column(name = "creation_date",nullable = false)
+    @Column(name = "creation_date")
     private LocalDateTime createdAt;
 
     @Column(name = "value",nullable = false)

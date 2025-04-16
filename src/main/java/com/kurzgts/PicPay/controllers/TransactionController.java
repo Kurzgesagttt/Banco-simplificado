@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/transfers")
@@ -20,11 +24,12 @@ public class TransactionController {
     TransactionService service;
 
     @PostMapping
-    public ResponseEntity<Transaction> createTransfer(@RequestBody TransferDTO dto){
-        service.makeTransfer(dto);
+    public ResponseEntity<Transaction> createTransaction(@RequestBody TransferDTO dto){
+        Transaction transaction = service.makeTransaction(dto);
 
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(transaction.getId()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
 

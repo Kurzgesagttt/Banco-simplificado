@@ -2,6 +2,7 @@ package com.kurzgts.PicPay.services;
 
 import com.kurzgts.PicPay.dto.TransferDTO;
 import com.kurzgts.PicPay.exceptions.UserNotFoundException;
+import com.kurzgts.PicPay.models.Transaction;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.TransactionRepository;
 import com.kurzgts.PicPay.repositories.UserRepository;
@@ -14,26 +15,35 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
 
     @Autowired
-    TransactionRepository transferRepository;
+    TransactionRepository transactionRepository;
     @Autowired
-    UserRepository userRepository
+    UserRepository userRepository;
     @Autowired
     TransactionValidation transactionValidation;
 
-    public TransferDTO makeTransfer(TransferDTO dto){
-
-        User sender = transactionValidation.findByCpf(dto.senderCpf())
+    public Transaction makeTransaction(TransferDTO dto){
+        Transaction transaction = new Transaction();
+        User sender = transactionRepository.findByCpf(dto.senderCpf())
                 .orElseThrow(() -> new UserNotFoundException("Sender not found"));
-        User receiver = transactionValidation.f(dto.receiverCpf())
+        User receiver = transactionRepository.findByCpf(dto.receiverCpf())
                 .orElseThrow(() -> new UsernameNotFoundException("Receiver not found"));
         //valida se todas as regras de negocio para transacao estao corretas
         transactionValidation.validateTransfer(sender, receiver, dto.value());
 
-
+        //atualiza dados para adicionar no banco transactions
+        transaction.setSender(sender.getId());
+        transaction.setReceiver(receiver.getId());
+        transaction.setValue(dto.value());
+        transaction.setStatus(true);
+        transactionRepository.save(transaction);
+        //atualiza o saldo do usuario
         sender.setBalance(sender.getBalance() - dto.value());
-        receiver.setBalance(receiver.getBalance() + dto.value());
         userRepository.save(sender);
-        userRepository.save()
+        //atualiza o saldo do usuario
+        receiver.setBalance(receiver.getBalance() + dto.value());
+        userRepository.save(receiver);
+
+        return transaction;
 
     }
 
