@@ -29,16 +29,16 @@ public class Transfer {
     @Column(name = "value",nullable = false)
     private Double value;
 
-    @Column(name = "status",nullable = false)
-    private String status;
+    @Column(name = "realized",nullable = false)
+    private boolean realized;
 
-    public Transfer(UUID id, LocalDateTime createdAt, UUID sender, UUID receiver, Double value, String status) {
+    public Transfer(UUID id, LocalDateTime createdAt, UUID sender, UUID receiver, Double value, boolean realized) {
         this.id = id;
         this.createdAt = createdAt;
         this.sender = sender;
         this.receiver = receiver;
         this.value = value;
-        this.status = status;
+        this.realized = realized;
     }
 
     public Transfer() {
@@ -84,12 +84,12 @@ public class Transfer {
         this.value = value;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean isRealized() {
+        return realized;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(boolean realized) {
+        this.realized = realized;
     }
 
 

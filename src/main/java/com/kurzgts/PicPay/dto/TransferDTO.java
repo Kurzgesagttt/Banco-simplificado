@@ -1,4 +1,6 @@
 package com.kurzgts.PicPay.dto;
 
-public record TransferDTO() {
+public record TransferDTO(String senderCpf, String receiverCpf, Double value) {
 }
+
+
