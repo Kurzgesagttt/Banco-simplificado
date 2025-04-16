@@ -8,5 +8,4 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
-    Optional<User> findByCpf(String cpf);
 }

@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/transfers")
+@RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired

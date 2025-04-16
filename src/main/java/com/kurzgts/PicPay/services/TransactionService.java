@@ -23,9 +23,9 @@ public class TransactionService {
 
     public Transaction makeTransaction(TransferDTO dto){
         Transaction transaction = new Transaction();
-        User sender = transactionRepository.findByCpf(dto.senderCpf())
+        User sender = userRepository.findByCpf(dto.senderCpf())
                 .orElseThrow(() -> new UserNotFoundException("Sender not found"));
-        User receiver = transactionRepository.findByCpf(dto.receiverCpf())
+        User receiver = userRepository.findByCpf(dto.receiverCpf())
                 .orElseThrow(() -> new UsernameNotFoundException("Receiver not found"));
         //valida se todas as regras de negocio para transacao estao corretas
         transactionValidation.validateTransfer(sender, receiver, dto.value());

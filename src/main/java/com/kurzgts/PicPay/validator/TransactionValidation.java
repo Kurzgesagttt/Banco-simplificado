@@ -1,6 +1,7 @@
 package com.kurzgts.PicPay.validator;
 
 import com.kurzgts.PicPay.exceptions.OperacaoNaoPermitidaException;
+import com.kurzgts.PicPay.exceptions.RefusedTransactionException;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +16,19 @@ import java.util.Map;
 public class TransactionValidation {
 
     @Autowired
-    TransactionRepository repository;
-    @Autowired
     RestTemplate restTemplate;
 
     public void validateTransfer(User sender, User receiver, Double value){
             if(!authorizationRequestApi()){
                 throw new OperacaoNaoPermitidaException("Operacao nao autorizada");
             }
-            if(sender.getUserType().equals("MERCHANT")){
+            if("MERCHANT".equals(sender.getUserType())){
                 throw new IllegalArgumentException("Lojistas nao podem realizar transferencias");
             }
-            if(sender.getBalance() > 0 && sender.getBalance() < value){
+            if(sender.getBalance() > 0 || sender.getBalance() < value){
                 throw new IllegalArgumentException("Sem saldo suficiente para realizar a transferencia");
             }
-            if(value <= 0){
+            if(value == null || value <= 0){
                 throw new IllegalArgumentException("Valor da transferencia deve ser maior que zero");
             }
             if(sender.getId().equals(receiver.getId())){
@@ -44,6 +43,11 @@ public class TransactionValidation {
         if(response.getStatusCode() == HttpStatus.OK){
             String message = (String) response.getBody().get("status");
             return "success".equalsIgnoreCase(message);
-        }else return false;
+        }else {
+            throw new RefusedTransactionException("Transação nao permitida");
+        }
      }
+
+
+
 }
