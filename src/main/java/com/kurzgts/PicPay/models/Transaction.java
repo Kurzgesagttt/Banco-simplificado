@@ -3,17 +3,16 @@ package com.kurzgts.PicPay.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "transfers")
-public class Transfer {
+@Table(name = "transactions")
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "transfer_id")
+    @Column(name = "transaction_id")
     private UUID id;
 
     @Column(name = "sender",nullable = false)
@@ -32,7 +31,7 @@ public class Transfer {
     @Column(name = "realized",nullable = false)
     private boolean realized;
 
-    public Transfer(UUID id, LocalDateTime createdAt, UUID sender, UUID receiver, Double value, boolean realized) {
+    public Transaction(UUID id, LocalDateTime createdAt, UUID sender, UUID receiver, Double value, boolean realized) {
         this.id = id;
         this.createdAt = createdAt;
         this.sender = sender;
@@ -41,7 +40,7 @@ public class Transfer {
         this.realized = realized;
     }
 
-    public Transfer() {
+    public Transaction() {
     }
 
     public UUID getId() {

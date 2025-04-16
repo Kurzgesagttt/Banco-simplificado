@@ -2,8 +2,8 @@ package com.kurzgts.PicPay.controllers;
 
 
 import com.kurzgts.PicPay.dto.TransferDTO;
-import com.kurzgts.PicPay.models.Transfer;
-import com.kurzgts.PicPay.services.TransferService;
+import com.kurzgts.PicPay.models.Transaction;
+import com.kurzgts.PicPay.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/transfers")
-public class TransferController {
+public class TransactionController {
 
     @Autowired
-    TransferService service;
+    TransactionService service;
 
     @PostMapping
-    public ResponseEntity<Transfer> createTransfer(@RequestBody TransferDTO dto){
-
+    public ResponseEntity<Transaction> createTransfer(@RequestBody TransferDTO dto){
+        service.makeTransfer(dto);
 
 
         return ResponseEntity.status(HttpStatus.CREATED).build();

@@ -3,6 +3,7 @@ package com.kurzgts.PicPay.exceptions.common;
 import com.kurzgts.PicPay.dto.ErroResponseDTO;
 import com.kurzgts.PicPay.exceptions.OperacaoNaoPermitidaException;
 import com.kurzgts.PicPay.exceptions.RegistroDuplicadoException;
+import com.kurzgts.PicPay.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,5 +31,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<ErroResponseDTO> registroDuplicadoException(RegistroDuplicadoException e, WebRequest request) {
         ErroResponseDTO response = new ErroResponseDTO(e.getMessage(), request.getDescription(false), new Date());
         return new ResponseEntity<>(response,HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public final ResponseEntity<ErroResponseDTO> userNotFoundHandler(UserNotFoundException ex, WebRequest request){
+        ErroResponseDTO restponse = new ErroResponseDTO(ex.getMessage(), request.getDescription(false), new Date());
+        return new ResponseEntity<>(restponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public final ResponseEntity<ErroResponseDTO> illegalArgumentException(IllegalArgumentException e,WebRequest request){
+        ErroResponseDTO response = new ErroResponseDTO(e.getMessage(),request.getDescription(false),new Date());
+        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
 }
