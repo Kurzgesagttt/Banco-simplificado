@@ -1,6 +1,7 @@
 package com.kurzgts.PicPay.controllers;
 
 import com.kurzgts.PicPay.dto.CreateUserDTO;
+import com.kurzgts.PicPay.mapper.UserMapper;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.services.UserService;
 import jakarta.validation.Valid;
@@ -21,9 +22,12 @@ public class UserController {
     @Autowired
     UserService service;
 
+    @Autowired
+    UserMapper mapper;
+
     @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody CreateUserDTO user){
-        User newUser = CreateUserMapper.toEntity(user);
+        User newUser = mapper.toEntity(user);
         User createdUser = service.createUser(newUser);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(createdUser.getId()).toUri();
