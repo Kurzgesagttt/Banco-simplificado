@@ -4,6 +4,8 @@ package com.kurzgts.PicPay.controllers;
 import com.kurzgts.PicPay.dto.TransferDTO;
 import com.kurzgts.PicPay.models.Transaction;
 import com.kurzgts.PicPay.services.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ public class TransactionController {
 
     @Autowired
     TransactionService service;
+
+
 
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@RequestBody TransferDTO dto){

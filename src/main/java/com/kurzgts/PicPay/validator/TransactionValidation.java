@@ -47,7 +47,4 @@ public class TransactionValidation {
             throw new RefusedTransactionException("Transação nao permitida");
         }
      }
-
-
-
 }
