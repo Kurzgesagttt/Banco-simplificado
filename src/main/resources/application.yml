@@ -12,6 +12,16 @@ spring:
       ddl-auto: update
     properties:
       hibernate.format_sql: true
+
+  mail:
+    host: stmp.hotmail.com
+    port: 2525
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.debug: true
 logging:
   level:
     root: WARN
