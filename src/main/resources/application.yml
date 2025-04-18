@@ -1,11 +1,13 @@
 spring:
   application:
     name: PicPay
+
   datasource:
     url: ${DATASOURCE_URL:jdbc:mysql://localhost:3333/banco}
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     show-sql: true
     hibernate:
@@ -14,20 +16,16 @@ spring:
       hibernate.format_sql: true
 
   mail:
-    host: stmp.hotmail.com
-    port: 2525
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:lucaskappa66@gmail.com}
+    password: ${MAIL_PASSWORD:sua_senha_de_app}
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
       mail.debug: true
+
 logging:
   level:
     root: WARN
     com.kurzgts.PicPay: INFO
-
-
-
-
-

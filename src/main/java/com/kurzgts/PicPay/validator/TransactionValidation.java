@@ -18,23 +18,29 @@ public class TransactionValidation {
     @Autowired
     RestTemplate restTemplate;
 
-    public void validateTransfer(User sender, User receiver, Double value){
-            if(!authorizationRequestApi()){
-                throw new OperacaoNaoPermitidaException("Operacao nao autorizada");
-            }
-            if("MERCHANT".equals(sender.getUserType())){
-                throw new IllegalArgumentException("Lojistas nao podem realizar transferencias");
-            }
-            if(sender.getBalance() > 0 || sender.getBalance() < value){
-                throw new IllegalArgumentException("Sem saldo suficiente para realizar a transferencia");
-            }
-            if(value == null || value <= 0){
-                throw new IllegalArgumentException("Valor da transferencia deve ser maior que zero");
-            }
-            if(sender.getId().equals(receiver.getId())){
-                throw new IllegalArgumentException("Voce nao pode fazer uma transferencia para voce mesmo");
-            }
+    public void validateTransfer(User sender, User receiver, Double value) {
+
+        if (value == null || value <= 0) {
+            throw new IllegalArgumentException("Valor da transferencia deve ser maior que zero");
+        }
+
+        if (!authorizationRequestApi()) {
+            throw new OperacaoNaoPermitidaException("Operacao nao autorizada");
+        }
+
+        if ("MERCHANT".equals(sender.getUserType())) {
+            throw new IllegalArgumentException("Lojistas nao podem realizar transferencias");
+        }
+
+        if (sender.getBalance() < value) {
+            throw new IllegalArgumentException("Sem saldo suficiente para realizar a transferencia");
+        }
+
+        if (sender.getId().equals(receiver.getId())) {
+            throw new IllegalArgumentException("Voce nao pode fazer uma transferencia para voce mesmo");
+        }
     }
+
 
     public boolean authorizationRequestApi(){
         String url = "https://util.devi.tools/api/v2/authorize";

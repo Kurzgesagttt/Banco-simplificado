@@ -8,6 +8,7 @@ import com.kurzgts.PicPay.repositories.TransactionRepository;
 import com.kurzgts.PicPay.repositories.UserRepository;
 import com.kurzgts.PicPay.validator.TransactionValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class TransactionService {
     UserRepository userRepository;
     @Autowired
     TransactionValidation transactionValidation;
+    @Autowired
+    NotificationService notificationService;
 
     public Transaction makeTransaction(TransferDTO dto){
         Transaction transaction = new Transaction();
@@ -42,6 +45,9 @@ public class TransactionService {
         //atualiza o saldo do usuario
         receiver.setBalance(receiver.getBalance() + dto.value());
         userRepository.save(receiver);
+
+        notificationService.enviarNotificacao(sender.getEmail(), "Transferência realizada com sucesso", "Você transferiu R$" + dto.value() + " para " + receiver.getName());
+        //TODO enviar notificação para o receiver
 
         return transaction;
 
