@@ -5,12 +5,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class NotificationService {
 
     @Autowired
     JavaMailSender javaMailSender;
+    @Autowired
+    RestTemplate restTemplate;
 
     @Async(value = "emailSenderThread")
     public void enviarNotificacao(String destinatario, String assunto, String corpo) {
@@ -21,4 +24,10 @@ public class NotificationService {
         mensagem.setFrom("lucaskappa66@gmail.com");
         javaMailSender.send(mensagem);
     }
+
+    public boolean authorizationRequestApi() {
+        String url = "https://util.devi.tools/api/v1/notify";
+
+    }
+
 }
