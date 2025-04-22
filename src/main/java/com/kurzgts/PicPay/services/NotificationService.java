@@ -9,13 +9,14 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
-
 @Service
 public class NotificationService {
 
     @Autowired
     JavaMailSender javaMailSender;
+    @Autowired
+    RestTemplate restTemplate;
+    @Autowired
 
     @Async(value = "emailSenderThread")
     public void enviarNotificacao(String destinatario, String assunto, String corpo) {
@@ -34,7 +35,6 @@ public class NotificationService {
     public boolean authorizationRequestApi() {
         String url = "https://util.devi.tools/api/v1/notify";
 
-        RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
 

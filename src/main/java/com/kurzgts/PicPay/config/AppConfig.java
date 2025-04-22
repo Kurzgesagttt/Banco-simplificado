@@ -16,6 +16,7 @@ public class AppConfig {
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
+
     @Value("${spring.mail.host}")
     private String host;
 
