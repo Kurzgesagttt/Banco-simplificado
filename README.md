@@ -2,7 +2,8 @@
 
 - A api roda com um banco de dados no docker, e pode ser executado com a linha de comando em comandos-docker.txt
 - A api necessita de uma conta de email e senha para o serviço de envio de email pela biblioteca java mail sender
-# 📦 API - Projeto com Envio de Emails
+# 📦 API - Projeto Backend Dev Junior
+ - https://github.com/PicPay/picpay-desafio-backend
 
 Este projeto é uma API desenvolvida com Java Spring, utilizando diversas tecnologias modernas para integração, persistência de dados e envio de emails. A aplicação utiliza Docker para facilitar o ambiente de execução e depende de uma conta de email válida para realizar o envio de mensagens via JavaMailSender.
 
