@@ -16,8 +16,6 @@ public class NotificationService {
 
     @Autowired
     JavaMailSender javaMailSender;
-    @Autowired
-    RestTemplate restTemplate;
 
     @Async(value = "emailSenderThread")
     public void enviarNotificacao(String destinatario, String assunto, String corpo) {

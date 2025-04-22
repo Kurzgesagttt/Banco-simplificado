@@ -21,11 +21,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/transaction")
 public class TransactionController {
-
     @Autowired
     TransactionService service;
-
-
 
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@RequestBody TransferDTO dto){
@@ -36,6 +33,7 @@ public class TransactionController {
         return ResponseEntity.created(location).build();
     }
 
+    //TODO
 
 
 }
