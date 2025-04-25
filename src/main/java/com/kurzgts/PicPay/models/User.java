@@ -1,5 +1,6 @@
 package com.kurzgts.PicPay.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -36,6 +37,7 @@ public class User {
 
     @CreationTimestamp
     @Column(name = "create_date",nullable = false)
+    //@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss") -- Como formatar data no json
     private LocalDateTime createdAt;
 
     public User(String name,String email,String password, String cpf, UserTypes userType) {

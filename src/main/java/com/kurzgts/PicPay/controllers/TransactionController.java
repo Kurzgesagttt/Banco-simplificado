@@ -2,6 +2,7 @@ package com.kurzgts.PicPay.controllers;
 
 
 import com.kurzgts.PicPay.dto.TransferDTO;
+import com.kurzgts.PicPay.dtov2.TransferDTOV2;
 import com.kurzgts.PicPay.models.Transaction;
 import com.kurzgts.PicPay.services.TransactionService;
 import org.slf4j.Logger;
@@ -27,6 +28,16 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@RequestBody TransferDTO dto){
         Transaction transaction = service.makeTransaction(dto);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(transaction.getId()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping()
+    @RequestMapping("/v2")
+    public ResponseEntity<Transaction> createTransactionV2(@RequestBody TransferDTOV2 dto){
+        Transaction transaction = service.makeTransactionV2(dto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(transaction.getId()).toUri();

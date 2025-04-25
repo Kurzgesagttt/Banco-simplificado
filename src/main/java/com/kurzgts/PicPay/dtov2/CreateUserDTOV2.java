@@ -4,6 +4,7 @@ import com.kurzgts.PicPay.models.UserTypes;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
+
 public class CreateUserDTOV2 {
     @NotBlank(message = "Campo Nome vazio")
     private String name;

@@ -10,17 +10,16 @@ public class ObjectMapper {
 
     private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
-    public static  <O, D> D parseObject(O origin, Class<D> destination){
+    public static <O, D> D parseObject(O origin, Class<D> destination) {
         return mapper.map(origin, destination);
     }
 
-    public static  <O, D> List<D> parseListObject(List<O> origin, Class<D> destination){
+    public static <O, D> List<D> parseListObjects(List<O> origin, Class<D> destination) {
 
-        List<D> destinationList = new ArrayList<>();
-
-        for(Object O : origin){
-           destinationList.add( mapper.map(origin, destination));
+        List<D> destinationObjects = new ArrayList<D>();
+        for (Object o : origin) {
+            destinationObjects.add(mapper.map(o, destination));
         }
-        return destinationList;
+        return destinationObjects;
     }
 }

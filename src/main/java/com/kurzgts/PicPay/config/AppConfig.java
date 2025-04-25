@@ -1,5 +1,8 @@
 package com.kurzgts.PicPay.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,4 +48,17 @@ public class AppConfig {
 
         return mailSender;
     }
+
+    @Bean
+    public ObjectMapper objectMapper(){
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        SimpleFilterProvider filters = new SimpleFilterProvider()
+                .addFilter("userFilter",
+                        SimpleBeanPropertyFilter.serializeAllExcept("password"));
+
+        objectMapper.setFilterProvider(filters);
+        return objectMapper;
+    }
+
 }
