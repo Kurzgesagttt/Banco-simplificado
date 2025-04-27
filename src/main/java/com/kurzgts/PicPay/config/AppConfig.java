@@ -52,7 +52,7 @@ public class AppConfig {
     @Bean
     public ObjectMapper objectMapper(){
         ObjectMapper objectMapper = new ObjectMapper();
-
+        //Configura o filtro para serializar todos os campos, exceto o campo "password"
         SimpleFilterProvider filters = new SimpleFilterProvider()
                 .addFilter("userFilter",
                         SimpleBeanPropertyFilter.serializeAllExcept("password"));
