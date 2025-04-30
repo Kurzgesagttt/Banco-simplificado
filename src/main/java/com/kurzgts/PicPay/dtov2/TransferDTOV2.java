@@ -2,8 +2,10 @@ package com.kurzgts.PicPay.dtov2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import io.swagger.v3.oas.annotations.Hidden;
 
 @JsonPropertyOrder({"sender", "receiver", "value"})
+@Hidden
 public class TransferDTOV2 {
 
     @JsonProperty("sender")

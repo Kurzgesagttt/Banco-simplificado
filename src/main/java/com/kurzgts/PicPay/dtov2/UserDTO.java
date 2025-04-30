@@ -2,8 +2,10 @@ package com.kurzgts.PicPay.dtov2;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.kurzgts.PicPay.models.UserTypes;
+import io.swagger.v3.oas.annotations.Hidden;
 
 @JsonFilter("userFilter")
+@Hidden
 public class UserDTO{
 
     private String name;

@@ -1,7 +1,10 @@
 package com.kurzgts.PicPay.dtov2;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 import java.util.Date;
 
+@Hidden
 public class ErroResponseDTOV2 {
 
     private String message;

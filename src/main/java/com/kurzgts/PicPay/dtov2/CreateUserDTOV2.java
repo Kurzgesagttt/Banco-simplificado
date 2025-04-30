@@ -1,10 +1,12 @@
 package com.kurzgts.PicPay.dtov2;
 
 import com.kurzgts.PicPay.models.UserTypes;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 
+@Hidden
 public class CreateUserDTOV2 {
     @NotBlank(message = "Campo Nome vazio")
     private String name;
