@@ -37,7 +37,6 @@ public class UserController {
                 content = @Content(schema = @Schema(implementation = CreateUserDTO.class))
             )
     })
-    @Parameter
     public ResponseEntity<User> createUser(@Valid @RequestBody CreateUserDTOV2 user){
         User newUser = ObjectMapper.parseObject(user, User.class);
         User createdUser = service.createUser(newUser);

@@ -36,11 +36,18 @@ public class TransactionController {
     TransactionService service;
 
     @PostMapping("v1")
-    @Hidden
-//    @Operation(
-//            summary = "Cria transação",
-//            description = "realiza uma nova transação e persiste no Banco de Dados"
-//    )
+    @Operation(
+            summary = "Cria transação V1",
+            description = "realiza uma nova transação e persiste no Banco de Dados V1",
+            tags = {"Transactions", "V1"},
+            responses = {
+                    @ApiResponse(
+                            description = "Transação criada com sucesso",
+                            responseCode = "201",
+                            content = @Content(mediaType = "application/json",schema = @Schema(implementation = Transaction.class))
+                    )
+            }
+    )
     public ResponseEntity<Transaction> createTransaction(@RequestBody TransferDTO dto){
         Transaction transaction = service.makeTransaction(dto);
 
@@ -50,11 +57,28 @@ public class TransactionController {
     }
 
     @PostMapping("v2")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Criar transação",
-                content = @Content(schema = @Schema(implementation = TransferDTOV2.class))
-            )
-    })
+    @Operation(
+            summary = "Cria transação",
+            description = "realiza uma nova transação e persiste no Banco de Dados",
+            tags = {"Transactions","V2"},
+            responses = {
+                    @ApiResponse(
+                            description = "Transação criada com sucesso",
+                            responseCode = "201",
+                            content = @Content(mediaType = "application/json",schema = @Schema(implementation = TransferDTOV2.class))
+                    ),
+                    @ApiResponse(
+                            description = "Cpf not found",
+                            responseCode = "404",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            description = "Transacao nao autorizada",
+                            responseCode = "500",
+                            content = @Content
+                    )
+            }
+    )
     public ResponseEntity<Transaction> createTransactionV2(@RequestBody TransferDTOV2 dto){
         Transaction transaction = service.makeTransactionV2(dto);
 
@@ -62,8 +86,5 @@ public class TransactionController {
                 .buildAndExpand(transaction.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
-
-    //TODO
-
 
 }
