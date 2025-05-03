@@ -1,5 +1,6 @@
 package com.kurzgts.PicPay.services;
 
+import com.kurzgts.PicPay.dtov2.UserDTO;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.UserRepository;
 import com.kurzgts.PicPay.validator.UserValidator;
@@ -29,7 +30,8 @@ public class UserService {
         return repository.save(user);
     }
 
-    public List<User> getAllUsers(){
-        return repository.findAll();
+    public List<UserDTO> getAllUsers(){
+        //FIXME
+
     }
 }
