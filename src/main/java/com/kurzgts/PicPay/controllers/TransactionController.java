@@ -63,17 +63,17 @@ public class TransactionController {
             tags = {"Transactions","V2"},
             responses = {
                     @ApiResponse(
-                            description = "Transação criada com sucesso",
+                            description = "Success",
                             responseCode = "201",
                             content = @Content(mediaType = "application/json",schema = @Schema(implementation = TransferDTOV2.class))
                     ),
                     @ApiResponse(
-                            description = "Cpf not found",
+                            description = "Not found",
                             responseCode = "404",
                             content = @Content
                     ),
                     @ApiResponse(
-                            description = "Transacao nao autorizada",
+                            description = "Unouthorized",
                             responseCode = "500",
                             content = @Content
                     )
