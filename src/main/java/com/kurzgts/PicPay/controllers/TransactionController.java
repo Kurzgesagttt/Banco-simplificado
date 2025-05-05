@@ -19,13 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -87,4 +85,15 @@ public class TransactionController {
         return ResponseEntity.created(location).build();
     }
 
+
+
+    @GetMapping
+    @Operation(
+            description = "return a list of transaction DTOs",
+            summary = "Get All transactions"
+    )
+    public ResponseEntity<List<TransferDTOV2>> getAllTransactions(){
+        List<TransferDTOV2> list = service.getAllTransaction();
+        return ResponseEntity.ok(list);
+    }
 }

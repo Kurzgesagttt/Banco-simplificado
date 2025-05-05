@@ -1,6 +1,7 @@
 package com.kurzgts.PicPay.services;
 
 import com.kurzgts.PicPay.dtov2.UserDTO;
+import com.kurzgts.PicPay.mapper.ObjectMapper;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.UserRepository;
 import com.kurzgts.PicPay.validator.UserValidator;
@@ -31,7 +32,7 @@ public class UserService {
     }
 
     public List<UserDTO> getAllUsers(){
-        //FIXME
-
+        List<User> list = repository.findAll();
+        return ObjectMapper.parseListObjects(list, UserDTO.class);
     }
 }

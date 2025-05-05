@@ -3,6 +3,7 @@ package com.kurzgts.PicPay.services;
 import com.kurzgts.PicPay.dto.TransferDTO;
 import com.kurzgts.PicPay.dtov2.TransferDTOV2;
 import com.kurzgts.PicPay.exceptions.UserNotFoundException;
+import com.kurzgts.PicPay.mapper.ObjectMapper;
 import com.kurzgts.PicPay.models.Transaction;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.TransactionRepository;
@@ -11,6 +12,8 @@ import com.kurzgts.PicPay.validator.TransactionValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -79,6 +82,20 @@ public class TransactionService {
 
         return transaction;
 
+    }
+
+    public List<TransferDTOV2> getAllTransaction(){
+        List<Transaction> list = transactionRepository.findAll();
+
+        if (list.isEmpty()){
+            throw new UserNotFoundException("No transactions found");
+        }
+        return list.stream().map(transaction -> {
+            String senderCpf = userRepository.findById(transaction.getSender()).map(User::getCpf).orElse("unknow-sender");
+
+            String receiverCpf = userRepository.findById(transaction.getSender()).map(User::getCpf).orElse("unknow-receiver");
+            return new TransferDTOV2(senderCpf,receiverCpf,transaction.getValue());
+        }).toList();
     }
 
 

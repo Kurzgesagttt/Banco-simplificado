@@ -65,8 +65,8 @@ public class UserController {
                             content = @Content)
                 }
             )
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> list = service.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
+        List<UserDTO> list = service.getAllUsers();
         return ResponseEntity.ok(list);
     }
 
