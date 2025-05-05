@@ -36,11 +36,7 @@ public class NotificationService {
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
-
         ResponseEntity<Void> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, Void.class);
-
         return response.getStatusCode() == HttpStatus.NO_CONTENT;
-
     }
-
 }

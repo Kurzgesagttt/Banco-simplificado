@@ -22,4 +22,10 @@ public class UserValidator {
         Optional<User> userEncontado =  repository.findByCpf(user.getCpf());
         return userEncontado.isPresent() && (user.getId() == null || !user.getId().equals(userEncontado.get().getId()));
     }
+
+    private boolean deleteValidation(User user){
+        Optional<User> userEncontado =  repository.findByCpf(user.getCpf());
+        //FIXME
+    }
+
 }

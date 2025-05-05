@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -34,5 +35,11 @@ public class UserService {
     public List<UserDTO> getAllUsers(){
         List<User> list = repository.findAll();
         return ObjectMapper.parseListObjects(list, UserDTO.class);
+    }
+
+    public void deleteUser(UUID id){
+
+        repository.deleteById(id);
+
     }
 }
