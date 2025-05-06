@@ -29,6 +29,7 @@ public class UserService {
     public User createUser(User user){
         validator.validator(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setBalance(0.0d);
         return repository.save(user);
     }
 
@@ -38,8 +39,7 @@ public class UserService {
     }
 
     public void deleteUser(UUID id){
-
+        validator.deleteValidation(id);
         repository.deleteById(id);
-
     }
 }

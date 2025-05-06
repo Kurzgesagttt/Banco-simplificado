@@ -1,6 +1,6 @@
 package com.kurzgts.PicPay.exceptions.common;
 
-import com.kurzgts.PicPay.dto.ErroResponseDTO;
+import com.kurzgts.PicPay.dtov2.ErroResponseDTOV2;
 import com.kurzgts.PicPay.exceptions.OperacaoNaoPermitidaException;
 import com.kurzgts.PicPay.exceptions.RefusedTransactionException;
 import com.kurzgts.PicPay.exceptions.RegistroDuplicadoException;
@@ -18,36 +18,36 @@ import java.util.Date;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ErroResponseDTO> genericHandlerException(Exception e, WebRequest request) {
-        ErroResponseDTO response = new ErroResponseDTO(e.getMessage(), request.getDescription(false), new Date());
+    public final ResponseEntity<ErroResponseDTOV2> genericHandlerException(Exception e, WebRequest request) {
+        ErroResponseDTOV2 response = new ErroResponseDTOV2(e.getMessage(), request.getDescription(false), new Date());
         return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(OperacaoNaoPermitidaException.class)
-    public final ResponseEntity<ErroResponseDTO> operacaoNaoPermitidaException(OperacaoNaoPermitidaException e, WebRequest request) {
-        ErroResponseDTO response = new ErroResponseDTO(e.getMessage(), request.getDescription(false),new Date());
+    public final ResponseEntity<ErroResponseDTOV2> operacaoNaoPermitidaException(OperacaoNaoPermitidaException e, WebRequest request) {
+        ErroResponseDTOV2 response = new ErroResponseDTOV2(e.getMessage(), request.getDescription(false),new Date());
         return new ResponseEntity<>(response,HttpStatus.CONFLICT);
     }
     @ExceptionHandler(RegistroDuplicadoException.class)
-    public final ResponseEntity<ErroResponseDTO> registroDuplicadoException(RegistroDuplicadoException e, WebRequest request) {
-        ErroResponseDTO response = new ErroResponseDTO(e.getMessage(), request.getDescription(false), new Date());
+    public final ResponseEntity<ErroResponseDTOV2> registroDuplicadoException(RegistroDuplicadoException e, WebRequest request) {
+        ErroResponseDTOV2 response = new ErroResponseDTOV2(e.getMessage(), request.getDescription(false), new Date());
         return new ResponseEntity<>(response,HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public final ResponseEntity<ErroResponseDTO> userNotFoundHandler(UserNotFoundException ex, WebRequest request){
-        ErroResponseDTO restponse = new ErroResponseDTO(ex.getMessage(), request.getDescription(false), new Date());
+    public final ResponseEntity<ErroResponseDTOV2> userNotFoundHandler(UserNotFoundException ex, WebRequest request){
+        ErroResponseDTOV2 restponse = new ErroResponseDTOV2(ex.getMessage(), request.getDescription(false), new Date());
         return new ResponseEntity<>(restponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public final ResponseEntity<ErroResponseDTO> illegalArgumentException(IllegalArgumentException e,WebRequest request){
-        ErroResponseDTO response = new ErroResponseDTO(e.getMessage(),request.getDescription(false),new Date());
+    public final ResponseEntity<ErroResponseDTOV2> illegalArgumentException(IllegalArgumentException ex,WebRequest request){
+        ErroResponseDTOV2 response = new ErroResponseDTOV2(ex.getMessage(),request.getDescription(false),new Date());
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(RefusedTransactionException.class)
-    public final ResponseEntity<ErroResponseDTO> refusedTransactionException(RefusedTransactionException ex,WebRequest request){
-        ErroResponseDTO response = new ErroResponseDTO(ex.getMessage(),request.getDescription(false),new Date());
+    public final ResponseEntity<ErroResponseDTOV2> refusedTransactionException(RefusedTransactionException ex,WebRequest request){
+        ErroResponseDTOV2 response = new ErroResponseDTOV2(ex.getMessage(),request.getDescription(false),new Date());
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
 }
