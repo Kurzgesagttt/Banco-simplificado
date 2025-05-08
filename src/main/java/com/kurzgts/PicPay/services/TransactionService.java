@@ -1,6 +1,6 @@
 package com.kurzgts.PicPay.services;
 
-import com.kurzgts.PicPay.dtov2.TransferDTOV2;
+import com.kurzgts.PicPay.dtov2.CreateTransferDTOV2;
 import com.kurzgts.PicPay.exceptions.UserNotFoundException;
 import com.kurzgts.PicPay.models.Transaction;
 import com.kurzgts.PicPay.models.User;
@@ -53,7 +53,7 @@ public class TransactionService {
 //        return transaction;
 //
 //    }
-    public Transaction makeTransactionV2(TransferDTOV2 dto){
+    public Transaction makeTransactionV2(CreateTransferDTOV2 dto){
         Transaction transaction = new Transaction();
         User sender = userRepository.findByCpf(dto.getSenderCpf())
                 .orElseThrow(() -> new UserNotFoundException("Sender not found"));
@@ -82,7 +82,7 @@ public class TransactionService {
 
     }
 
-    public List<TransferDTOV2> getAllTransaction(){
+    public List<CreateTransferDTOV2> getAllTransaction(){
         List<Transaction> list = transactionRepository.findAll();
 
         if (list.isEmpty()){
@@ -92,7 +92,7 @@ public class TransactionService {
             String senderCpf = userRepository.findById(transaction.getSender()).map(User::getCpf).orElse("unknow-sender");
 
             String receiverCpf = userRepository.findById(transaction.getSender()).map(User::getCpf).orElse("unknow-receiver");
-            return new TransferDTOV2(senderCpf,receiverCpf,transaction.getValue());
+            return new CreateTransferDTOV2(senderCpf,receiverCpf,transaction.getValue());
         }).toList();
     }
 

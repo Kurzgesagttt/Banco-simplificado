@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import com.kurzgts.PicPay.models.UserTypes;
 import io.swagger.v3.oas.annotations.Hidden;
 
+import java.io.Serializable;
+
 @JsonFilter("userFilter")
 @Hidden
-public class UserDTO{
+public class CreateUserDTO implements Serializable {
 
     private String name;
     private String email;
@@ -15,10 +17,10 @@ public class UserDTO{
     private String password;
     private Double balance;
 
-    public UserDTO() {
+    public CreateUserDTO() {
     }
 
-    public UserDTO(Double balance, String password, String cpf, UserTypes userType, String email, String name) {
+    public CreateUserDTO(Double balance, String password, String cpf, UserTypes userType, String email, String name) {
         this.balance = balance;
         this.password = password;
         this.cpf = cpf;

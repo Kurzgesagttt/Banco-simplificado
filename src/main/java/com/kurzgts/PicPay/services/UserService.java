@@ -1,12 +1,10 @@
 package com.kurzgts.PicPay.services;
 
-import com.kurzgts.PicPay.dtov2.UserDTO;
+import com.kurzgts.PicPay.dtov2.CreateUserDTO;
 import com.kurzgts.PicPay.mapper.ObjectMapper;
 import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.repositories.UserRepository;
 import com.kurzgts.PicPay.validator.UserValidator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,9 +31,9 @@ public class UserService {
         return repository.save(user);
     }
 
-    public List<UserDTO> getAllUsers(){
+    public List<CreateUserDTO> getAllUsers(){
         List<User> list = repository.findAll();
-        return ObjectMapper.parseListObjects(list, UserDTO.class);
+        return ObjectMapper.parseListObjects(list, CreateUserDTO.class);
     }
 
     public void deleteUser(UUID id){

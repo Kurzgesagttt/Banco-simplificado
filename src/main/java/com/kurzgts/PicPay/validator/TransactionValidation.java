@@ -45,7 +45,6 @@ public class TransactionValidation {
     public boolean authorizationRequestApi(){
         String url = "https://util.devi.tools/api/v2/authorize";
         ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
-
         if(response.getStatusCode() == HttpStatus.OK){
             String message = (String) response.getBody().get("status");
             return "success".equalsIgnoreCase(message);
