@@ -14,13 +14,13 @@ public class NotificationService {
 
     @Async(value = "emailSenderThread")
     public void enviarNotificacao(String email, String assunto, String mensagem) {
-        String url = "";
-        CreateMailDTO dto = new CreateMailDTO();
-        dto.setMailTo(email);
+        String url = "http://localhost:8081/mail";
+        CreateMailDTO dto = new CreateMailDTO(email, mensagem, assunto);
+        dto.setSenderEmail(email);
         dto.setSubject(assunto);
         dto.setContent(mensagem);
         //FIXME
-        restTemplate.put(url,dto);
+        restTemplate.postForEntity(url, dto, String.class);
     }
 
     //nao utilizado atualmente
