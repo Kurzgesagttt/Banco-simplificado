@@ -4,6 +4,8 @@ package com.kurzgts.PicPay.controllers;
 
 import com.kurzgts.PicPay.docs.UserControllerDocs;
 import com.kurzgts.PicPay.dtov2.CreateUserDTO;
+import com.kurzgts.PicPay.mapper.ObjectMapper;
+import com.kurzgts.PicPay.models.User;
 import com.kurzgts.PicPay.services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,15 @@ import java.util.UUID;
 public class UserController implements UserControllerDocs {
 
     @Autowired
-    UserService  service;
+    UserService service;
+
+    @Override
+    @PostMapping
+    public ResponseEntity<Void> createUser(@RequestBody CreateUserDTO dto){
+        User user = ObjectMapper.parseObject(dto, User.class);
+        service.createUser(user);
+        return ResponseEntity.created(null).build();
+    }
 
     @GetMapping
     @Override

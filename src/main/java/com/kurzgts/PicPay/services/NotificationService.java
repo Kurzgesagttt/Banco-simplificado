@@ -1,10 +1,7 @@
 package com.kurzgts.PicPay.services;
 
-import com.kurzgts.PicPay.exceptions.OperacaoNaoPermitidaException;
+import com.kurzgts.PicPay.dtov2.CreateMailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,8 +13,14 @@ public class NotificationService {
     RestTemplate restTemplate;
 
     @Async(value = "emailSenderThread")
-    public void enviarNotificacao(String destinatario, String assunto, String corpo) {
-
+    public void enviarNotificacao(String email, String assunto, String mensagem) {
+        String url = "";
+        CreateMailDTO dto = new CreateMailDTO();
+        dto.setMailTo(email);
+        dto.setSubject(assunto);
+        dto.setContent(mensagem);
+        //FIXME
+        restTemplate.put(url,dto);
     }
 
     //nao utilizado atualmente

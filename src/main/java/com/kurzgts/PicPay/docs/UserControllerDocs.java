@@ -8,11 +8,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 public interface UserControllerDocs {
     //TODO
+    @Operation(
+        summary = "Create User", description = "Post a new user",tags = {"User"},
+            responses = {@ApiResponse(responseCode = "200",content = @Content),
+            @ApiResponse(responseCode = "500",
+                    description = "Erro ao criar usuário, cheque os campos",
+                    content = @Content)}
+    )
+    ResponseEntity<Void> createUser(@RequestBody CreateUserDTO dto);
+
     @Operation(
             summary = "Get all users",
             description = "Get all users, no filter",
