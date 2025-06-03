@@ -2,6 +2,7 @@ package com.kurzgts.PicPay.services;
 
 import com.kurzgts.PicPay.dtov2.CreateMailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,9 +13,12 @@ public class NotificationService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Value("${spring.application.mail-ip}")
+    private String mail;
+
     @Async(value = "emailSenderThread")
     public void enviarNotificacao(String email, String assunto, String mensagem) {
-        String url = "http://localhost:8081/mail";
+        String url = "http://"+mail+":8081/mail";
         CreateMailDTO dto = new CreateMailDTO(email, mensagem, assunto);
         dto.setSenderEmail(email);
         dto.setSubject(assunto);

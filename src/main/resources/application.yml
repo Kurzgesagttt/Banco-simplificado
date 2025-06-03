@@ -1,20 +1,18 @@
 spring:
   application:
     name: PicPay
-
+    mail-ip: ${MAIL_IP:localhost}
   datasource:
     url: ${DATASOURCE_URL:jdbc:mysql://localhost:3333/banco}
     username: ${DATASOURCE_USERNAME:root}
     password: ${DATASOURCE_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
     properties:
       hibernate.format_sql: true
-
   mail:
     host: smtp.gmail.com
     port: 587

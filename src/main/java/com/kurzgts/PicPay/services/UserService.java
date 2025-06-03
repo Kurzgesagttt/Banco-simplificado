@@ -31,6 +31,11 @@ public class UserService {
         return repository.save(user);
     }
 
+    public User getUserById(UUID id){
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + id));
+    }
+
     public List<CreateUserDTO> getAllUsers(){
         List<User> list = repository.findAll();
         return ObjectMapper.parseListObjects(list, CreateUserDTO.class);

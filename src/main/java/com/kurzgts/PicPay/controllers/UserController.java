@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/user")
 @Tag(name = "User", description = "Endpoints for user management")
@@ -36,6 +39,16 @@ public class UserController implements UserControllerDocs {
     public ResponseEntity<List<CreateUserDTO>> getAllUsers(){
         List<CreateUserDTO> list = service.getAllUsers();
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CreateUserDTO> getUserById(@PathVariable("id") String id ){
+        UUID uuid = UUID.fromString(id);
+        User user = service.getUserById(uuid);
+        CreateUserDTO dto = ObjectMapper.parseObject(user, CreateUserDTO.class);
+        user.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
+        user.add(linkTo(methodOn(UserController.class).getAllUsers()).withRel("all-users"));
+        return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping("{id}")
