@@ -3,12 +3,13 @@ package com.kurzgts.PicPay.dtov2;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.kurzgts.PicPay.models.UserTypes;
 import io.swagger.v3.oas.annotations.Hidden;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 
 @JsonFilter("userFilter")
 @Hidden
-public class CreateUserDTO implements Serializable {
+public class CreateUserDTO extends RepresentationModel<CreateUserDTO> implements Serializable {
 
     private String name;
     private String email;
@@ -28,6 +29,8 @@ public class CreateUserDTO implements Serializable {
         this.email = email;
         this.name = name;
     }
+
+    // Getters e setters
 
     public String getName() {
         return name;

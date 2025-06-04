@@ -38,16 +38,25 @@ public class UserController implements UserControllerDocs {
     @Override
     public ResponseEntity<List<CreateUserDTO>> getAllUsers(){
         List<CreateUserDTO> list = service.getAllUsers();
-        return ResponseEntity.ok(list);
+
+        List<CreateUserDTO> dtoList = list.stream().peek(
+                dto ->{
+                    dto.add(linkTo(methodOn(UserController.class).getAllUsers()).withRel("all-users"));
+                }
+        ).toList();
+        return ResponseEntity.ok(dtoList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreateUserDTO> getUserById(@PathVariable("id") String id ){
+    public ResponseEntity<CreateUserDTO> getUserById(@PathVariable("id") String id) {
         UUID uuid = UUID.fromString(id);
         User user = service.getUserById(uuid);
+
         CreateUserDTO dto = ObjectMapper.parseObject(user, CreateUserDTO.class);
-        user.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
-        user.add(linkTo(methodOn(UserController.class).getAllUsers()).withRel("all-users"));
+        // Adiciona os links ao DTO, que herda de RepresentationModel
+        dto.add(linkTo(methodOn(UserController.class).getUserById(id)).withSelfRel());
+        dto.add(linkTo(methodOn(UserController.class).getAllUsers()).withRel("all-users"));
+
         return ResponseEntity.ok().body(dto);
     }
 
