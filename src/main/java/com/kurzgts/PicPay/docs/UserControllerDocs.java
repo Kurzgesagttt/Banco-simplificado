@@ -24,6 +24,16 @@ public interface UserControllerDocs {
     )
     ResponseEntity<Void> createUser(@RequestBody CreateUserDTO dto);
 
+
+    @Operation(
+            summary = "Get user by id", description = "get a user",tags = {"User"},
+            responses = {@ApiResponse(responseCode = "200",content = @Content),
+                    @ApiResponse(responseCode = "500",
+                            description = "Erro ao criar usuário, cheque os campos",
+                            content = @Content)}
+    )
+    ResponseEntity<CreateUserDTO> getUserById( String id);
+
     @Operation(
             summary = "Get all users",
             description = "Get all users, no filter",
