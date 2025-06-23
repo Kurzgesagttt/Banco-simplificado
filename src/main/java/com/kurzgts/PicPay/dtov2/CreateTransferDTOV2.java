@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.Hidden;
 
+import java.io.Serializable;
+
 @JsonPropertyOrder({"sender", "receiver", "value"})
 @Hidden
-public class TransferDTOV2 {
+public class CreateTransferDTOV2 implements Serializable {
 
     @JsonProperty("sender")
     private String senderCpf;
@@ -15,13 +17,13 @@ public class TransferDTOV2 {
     @JsonProperty("value")
     private Double value;
 
-    public TransferDTOV2(String senderCpf, String receiverCpf, Double value) {
+    public CreateTransferDTOV2(String senderCpf, String receiverCpf, Double value) {
         this.senderCpf = senderCpf;
         this.receiverCpf = receiverCpf;
         this.value = value;
     }
 
-    public TransferDTOV2() {
+    public CreateTransferDTOV2() {
     }
 
     public String getReceiverCpf() {

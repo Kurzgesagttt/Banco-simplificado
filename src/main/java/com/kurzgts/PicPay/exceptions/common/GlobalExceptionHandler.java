@@ -1,6 +1,6 @@
 package com.kurzgts.PicPay.exceptions.common;
 
-import com.kurzgts.PicPay.dto.ErroResponseDTO;
+import com.kurzgts.PicPay.dtov2.ErroResponseDTO;
 import com.kurzgts.PicPay.exceptions.OperacaoNaoPermitidaException;
 import com.kurzgts.PicPay.exceptions.RefusedTransactionException;
 import com.kurzgts.PicPay.exceptions.RegistroDuplicadoException;
@@ -41,12 +41,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public final ResponseEntity<ErroResponseDTO> illegalArgumentException(IllegalArgumentException e,WebRequest request){
-        ErroResponseDTO response = new ErroResponseDTO(e.getMessage(),request.getDescription(false),new Date());
+    public final ResponseEntity<ErroResponseDTO> illegalArgumentException(IllegalArgumentException ex, WebRequest request){
+        ErroResponseDTO response = new ErroResponseDTO(ex.getMessage(),request.getDescription(false),new Date());
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(RefusedTransactionException.class)
-    public final ResponseEntity<ErroResponseDTO> refusedTransactionException(RefusedTransactionException ex,WebRequest request){
+    public final ResponseEntity<ErroResponseDTO> refusedTransactionException(RefusedTransactionException ex, WebRequest request){
         ErroResponseDTO response = new ErroResponseDTO(ex.getMessage(),request.getDescription(false),new Date());
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
     }

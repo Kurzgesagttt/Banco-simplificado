@@ -33,23 +33,6 @@ public class AppConfig {
     private String password;
 
     @Bean
-    public JavaMailSender javaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(host);
-        mailSender.setPort(port);
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
-
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.debug", "true");
-
-        return mailSender;
-    }
-
-    @Bean
     public ObjectMapper objectMapper(){
         ObjectMapper objectMapper = new ObjectMapper();
         //Configura o filtro para serializar todos os campos, exceto o campo "password"

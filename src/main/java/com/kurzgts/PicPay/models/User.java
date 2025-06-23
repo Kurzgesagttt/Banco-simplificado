@@ -1,9 +1,9 @@
 package com.kurzgts.PicPay.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.hateoas.Link;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -116,5 +116,9 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void add(Link link) {
+
     }
 }
